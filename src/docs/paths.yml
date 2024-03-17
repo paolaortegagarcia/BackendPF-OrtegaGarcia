@@ -1,0 +1,404 @@
+paths:
+    ## productos
+    /api/products:
+        post:
+            tags:
+                - Products
+            summary: Creacion de productos
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/parameters/schemas/products"
+                required: true
+            responses:
+                200:
+                    description: Se creo el producto correctamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/Create"
+                404:
+                    description: Error en creacion del producto
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/NotFound"
+                500:
+                    description: Error en validacion del body
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/ValidationSchemaError"
+            security:
+                - BearerAuth: []
+    /api/products/all:
+        get:
+            tags:
+                - Products
+            summary: Buscar productos en base de datos
+            responses:
+                200:
+                    description: Se creo el producto correctamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/GetAllProducts"
+                404:
+                    description: Error en busqueda del producto
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/NotFound"
+                500:
+                    description: Error en validacion del body
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/ValidationSchemaError"
+            security:
+                - BearerAuth: []
+    /api/products/{id}:
+        get:
+            tags:
+                - Products
+            summary: Buscar producto por ID
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  description: ID del producto
+                  schema:
+                      type: string
+            responses:
+                200:
+                    description: Se encontro el producto correctamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/GetAllProducts"
+                404:
+                    description: Error al buscar el producto
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/GetByIdError"
+        put:
+            tags:
+                - Products
+            summary: Editar producto
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  description: ID del producto
+                  schema:
+                      type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/parameters/schemas/products"
+                required: true
+            responses:
+                200:
+                    description: Se encontro el producto correctamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/GetAllProducts"
+                404:
+                    description: Error al buscar el producto
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/GetByIdError"
+        delete:
+            tags:
+                - Products
+            summary: Borrar producto
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  description: ID del producto
+                  schema:
+                      type: string
+            responses:
+                200:
+                    description: Se borro el producto correctamente
+                404:
+                    description: Error al buscar el producto
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/GetByIdError"
+            security:
+                - BearerAuth: []
+    /api/products/add/{cartid}/{productid}:
+        post:
+            tags:
+                - Products
+            summary: Agregar producto al carrito
+            parameters:
+                - in: path
+                  name: cartid
+                  required: true
+                  description: ID del carrito
+                  schema:
+                      type: string
+                - in: path
+                  name: productid
+                  required: true
+                  description: ID del producto
+                  schema:
+                      type: string
+            responses:
+                200:
+                    description: Se agrego el producto correctamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/AddToCart"
+                404:
+                    description: Error en agregar el producto
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/NotFound"
+                500:
+                    description: Error en validacion del body
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Products/ValidationSchemaError"
+            security:
+                - BearerAuth: []
+    ## login
+    /api/users/login:
+        post:
+            tags:
+                - Users
+            summary: Login de usuario
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/parameters/schemas/login"
+                required: true
+            responses:
+                200:
+                    description: Login success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Users/User"
+    ## carritos
+    /api/carts:
+        post:
+            tags:
+                - Carts
+            summary: Creacion de carritos
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/parameters/schemas/carts"
+                required: true
+            responses:
+                200:
+                    description: Se creo el carrito correctamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/Create"
+                404:
+                    description: Error en creacion del carrio
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/NotFound"
+                500:
+                    description: Error en validacion del body
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/ValidationSchemaError"
+        get:
+            tags:
+                - Carts
+            summary: Buscar carritos en base de datos
+            responses:
+                200:
+                    description: Se encontro el carrito
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/GetAllCarts"
+                404:
+                    description: Error en busqueda del carrito
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/NotFound"
+            security:
+                - BearerAuth: []
+    /api/carts/{id}:
+        get:
+            tags:
+                - Carts
+            summary: Buscar carrito por ID
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  description: ID del carrito
+                  schema:
+                      type: string
+            responses:
+                200:
+                    description: Se encontro el carrito correctamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/GetAllCarts"
+                404:
+                    description: Error al buscar el carrito
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/GetByIdError"
+        put:
+            tags:
+                - Carts
+            summary: Editar carrito
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  description: ID del carrito
+                  schema:
+                      type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/parameters/schemas/carts"
+                required: true
+            responses:
+                200:
+                    description: Se encontro el carrito correctamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/GetAllCarts"
+                404:
+                    description: Error al buscar el producto
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/GetByIdError"
+        delete:
+            tags:
+                - Carts
+            summary: Borrar productos del carrito
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  description: ID del producto
+                  schema:
+                      type: string
+            responses:
+                200:
+                    description: Se borro el producto del carrito correctamente
+                404:
+                    description: Error al buscar el carrito
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/GetByIdError"
+    /api/carts/delete/{id}:
+        delete:
+            tags:
+                - Carts
+            summary: Borrar carrito completamente
+            parameters:
+                - in: path
+                  name: id
+                  required: true
+                  description: ID del producto
+                  schema:
+                      type: string
+            responses:
+                200:
+                    description: Se borro el carrito correctamente
+                404:
+                    description: Error al buscar el carrito
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/GetByIdError"
+    /api/carts/{cartid}/products/{productid}:
+        put:
+            tags:
+                - Carts
+            summary: Editar carrito
+            parameters:
+                - in: path
+                  name: cartid
+                  required: true
+                  description: ID del carrito
+                  schema:
+                      type: string
+                - in: path
+                  name: productid
+                  required: true
+                  description: ID del producto
+                  schema:
+                      type: string
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/parameters/schemas/carts"
+                required: true
+            responses:
+                200:
+                    description: Se actualizo el carrito correctamente
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/UpdateCarts"
+                404:
+                    description: Error al buscar el producto
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/GetByIdError"
+        delete:
+            tags:
+                - Carts
+            summary: Borrar producto del carrito
+            parameters:
+                - in: path
+                  name: cartid
+                  required: true
+                  description: ID del carrito
+                  schema:
+                      type: string
+                - in: path
+                  name: productid
+                  required: true
+                  description: ID del producto
+                  schema:
+                      type: string
+            responses:
+                200:
+                    description: Se borro el producto correctamente
+                404:
+                    description: Error al buscar el carrito
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Carts/GetByIdError"

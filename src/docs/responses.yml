@@ -1,0 +1,142 @@
+components:
+    schema:
+        Products:
+            Create:
+                type: object
+                properties:
+                    id:
+                        type: string
+                        description: ID del producto
+                    name:
+                        type: string
+                        description: Nombre del producto
+                    description:
+                        type: string
+                        description: Descripcion del producto
+                    price:
+                        type: number
+                        description: Precio del producto
+                    stock:
+                        type: number
+                        description: Stock del producto
+                example:
+                    id: 6563f5d393a88881917ddce9
+                    name: Anillo Basic
+                    description: Anillo básico de acero quirúrgico
+                    price: 100
+                    stock: 70
+            AddToCart:
+                type: object
+                properties:
+                    id:
+                        type: string
+                        description: ID del carrito
+                    products:
+                        type: array
+            GetAllProducts:
+                type: array
+                items:
+                    properties:
+                        id:
+                            type: string
+                            description: ID del producto
+                        name:
+                            type: string
+                            description: Nombre del producto
+                        description:
+                            type: string
+                            description: Descripcion del producto
+                        price:
+                            type: number
+                            description: Precio del producto
+                        stock:
+                            type: number
+                            description: Stock del producto
+                    example:
+                        id: 6563f5d393a88881917ddce9
+                        name: Anillo Basic
+                        description: Anillo básico de acero quirúrgico
+                        price: 100
+                        stock: 70
+            ValidationSchemaError:
+                type: object
+                properties:
+                    message:
+                        type: string
+                        description: Error en el schema de validacion
+            NotFound:
+                type: object
+                properties:
+                    message:
+                        type: string
+                        description: Error del servidor
+            GetByIdError:
+                type: object
+                properties:
+                    message:
+                        type: string
+                        description: No se encontro el ID solicitado
+        Users:
+            User:
+                type: object
+                properties:
+                status:
+                    type: number
+                    description: Código de estado de la petición
+                message:
+                    type: string
+                    description: Estado de la petición
+                data:
+                    type: string
+                    description: Token del usuario autenticado
+                example:
+                    status: 200
+                    message: Success
+                    data: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGU1MzZhZjU5ZGM3ZDcwZTczZDhjYWMiLCJpYXQiOjE2OTMzOTMzODIsImV4cCI6MTY5MzM5NDI4Mn0.3t3rqyv_3CPzd6yNnJgPvifmw2IBvY0Il7eqc4Zgh_w
+        Carts:
+            Create:
+                type: object
+                properties:
+                    id:
+                        type: string
+                        description: ID del carrito
+                    products:
+                        type: array
+            UpdateCart:
+                type: object
+                properties:
+                    id:
+                        type: string
+                        description: ID del carrito
+                    products:
+                        type: array
+            GetAllCarts:
+                type: array
+                items:
+                    properties:
+                        id:
+                            type: string
+                            description: ID del carrito
+                        products:
+                            type: array
+                            items:
+                                type: object
+                                properties:
+                                    product:
+                                        type: string
+                                        description: ID del producto
+                                    quantity:
+                                        type: number
+                                        description: Cantidad del producto en el carrito
+            NotFound:
+                type: object
+                properties:
+                    message:
+                        type: string
+                        description: Error del servidor
+            GetByIdError:
+                type: object
+                properties:
+                    message:
+                        type: string
+                        description: No se encontro el ID solicitado

@@ -1,0 +1,19 @@
+[31merror[39m | 02-02-2024 12:52:51 | error en el endpoint de prueba
+[31merror[39m | 02-02-2024 12:53:52 | Error message
+[31merror[39m | 02-17-2024 20:53:29 | Error en getAll = ReferenceError: createResponse is not defined
+[31merror[39m | 02-17-2024 20:53:29 | Error = createResponse is not defined
+[31merror[39m | 02-17-2024 21:02:02 | desde class.controller.js - Error en getAll = TypeError: Cannot read properties of undefined (reading 'service')
+[31merror[39m | 02-17-2024 21:02:02 | Error = Cannot read properties of undefined (reading 'service')
+[31merror[39m | 02-17-2024 21:03:04 | desde class.controller.js - Error en getAll = ReferenceError: service is not defined
+[31merror[39m | 02-17-2024 21:03:04 | Error = service is not defined
+[31merror[39m | 02-18-2024 16:54:13 | desde product.controller.js - Error en getProdById = TypeError: Cannot read properties of undefined (reading 'service')
+[31merror[39m | 02-18-2024 16:54:13 | Error = Cannot read properties of undefined (reading 'service')
+[31merror[39m | 02-18-2024 17:19:19 | Error = SyntaxError: Unexpected token ] in JSON at position 131
+[31merror[39m | 02-18-2024 17:19:26 | Error = SyntaxError: Unexpected token } in JSON at position 131
+[31merror[39m | 02-19-2024 10:08:23 | desde local-strategy.js - Error during registration: userService.findByEmail is not a function
+[31merror[39m | 02-19-2024 10:10:57 | desde local-strategy.js - Error during registration: userService.findByEmail is not a function
+[31merror[39m | 02-19-2024 10:12:05 | desde local-strategy.js - Error during registration: userService.findByEmail is not a function
+[31merror[39m | 02-19-2024 10:12:23 | Error = SyntaxError: Unexpected token p in JSON at position 63
+[31merror[39m | 02-19-2024 10:12:34 | desde local-strategy.js - Error during registration: userService.findByEmail is not a function
+[31merror[39m | 02-19-2024 10:13:07 | desde local-strategy.js - Error during registration: userService.findByEmail is not a function
+[31merror[39m | 02-19-2024 10:13:27 | desde local-strategy.js - Error during registration: userService.findByEmail is not a function

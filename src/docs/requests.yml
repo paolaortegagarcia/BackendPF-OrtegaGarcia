@@ -1,0 +1,72 @@
+components:
+    parameters:
+        schemas:
+            products:
+                type: object
+                required:
+                    - name
+                    - description
+                    - code
+                    - price
+                    - stock
+                    - category
+                properties:
+                    name:
+                        type: string
+                        description: Nombre del producto
+                    description:
+                        type: string
+                        description: Descripcion del producto
+                    code:
+                        type: string
+                        description: Codigo del producto
+                    price:
+                        type: number
+                        description: Precio del producto
+                    stock:
+                        type: number
+                        description: Stock del producto
+                    category:
+                        type: string
+                        description: Categoria del producto
+                example:
+                    name: Anillo Basic
+                    description: Anillo básico de acero quirúrgico
+                    code: jy004
+                    price: 100
+                    stock: 70
+                    category: Joyeria
+            login:
+                type: object
+                required:
+                    - email
+                    - password
+                properties:
+                    email:
+                        type: string
+                        description: Email del usuario
+                    password:
+                        type: string
+                        description: Password del usuario
+                example:
+                    email: premiumCoder@coder.com
+                    password: "premium123"
+            carts:
+                type: object
+                properties:
+                    products:
+                        type: array
+                        items:
+                            type: object
+                            properties:
+                                product:
+                                    type: string
+                                    description: ID del producto
+                                quantity:
+                                    type: number
+                                    description: Cantidad del producto en el carrito
+    securitySchemes:
+        BearerAuth:
+            type: http
+            scheme: bearer
+            bearerFormat: JWT
