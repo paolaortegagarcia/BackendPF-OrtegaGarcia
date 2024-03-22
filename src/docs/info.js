@@ -11,6 +11,10 @@ export const info = {
                 url: "http://localhost:8080",
             },
         ],
+        externalDocs: {
+            description: "Repositorio de GitHub",
+            url: "https://github.com/paolaortegagarcia/BackendPF-OrtegaGarcia",
+        },
     },
     apis: ["./src/docs/*.yml"],
 };
