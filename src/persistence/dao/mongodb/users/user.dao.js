@@ -152,4 +152,29 @@ export default class UserDaoMongoDB extends MongoDao {
             throw new Error(error);
         }
     }
+
+    async findInactiveUsers(thresholdDate) {
+        try {
+            return await UserModel.find({
+                last_connection: { $lt: thresholdDate },
+                isGithub: { $ne: true },
+            });
+        } catch (error) {
+            logger.error(`Error buscando usuarios inactivos: ${error}`);
+            throw error;
+        }
+    }
+
+    async deleteInactiveUsers(thresholdDate) {
+        try {
+            const result = await this.model.deleteMany({
+                last_connection: { $lt: thresholdDate },
+                isGithub: { $ne: true },
+            });
+            return result;
+        } catch (error) {
+            logger.error(`Error en deleteInactiveUsers DAO: ${error}`);
+            throw error;
+        }
+    }
 }

@@ -10,8 +10,6 @@ export const sendGmail = async (req, res) => {
             from: process.env.EMAIL,
             to: dest,
             subject: "Bienvenida/o",
-            // text: ''
-            // html: `<h1>Bienvenido/a a Coderhouse!</h1>`
             html: template,
             attachments: [
                 {

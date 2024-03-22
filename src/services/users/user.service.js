@@ -4,7 +4,7 @@ import { generateToken } from "../../jwt/auth.js";
 import factory from "../../persistence/factory.js";
 const { userDao } = factory;
 import UserRepository from "../../persistence/repository/users/user.repository.js";
-import { sendMail } from "./email.service.js";
+import { sendMail, sendInactiveUserEmail } from "./email.service.js";
 const userRepository = new UserRepository();
 
 export default class UserService extends Services {
@@ -34,7 +34,7 @@ export default class UserService extends Services {
             if (!response) {
                 return false;
             } else {
-                //await sendMail(user, "register");
+                await sendMail(user, "register");
                 return response;
             }
         } catch (error) {
@@ -144,6 +144,30 @@ export default class UserService extends Services {
         }
     }
 
+    async deleteInactiveUsersAndNotify() {
+        const thresholdDate = new Date(new Date().getTime() - 30 * 60 * 1000);
+        try {
+            const inactiveUsers = await userDao.findInactiveUsers(
+                thresholdDate
+            );
+
+            if (inactiveUsers.length > 0) {
+                await sendInactiveUserEmail(inactiveUsers);
+                const deletionResult = await userDao.deleteInactiveUsers(
+                    thresholdDate
+                );
+                return {
+                    deletedCount: deletionResult.deletedCount,
+                    notifiedUsers: inactiveUsers.length,
+                };
+            }
+            return { deletedCount: 0, notifiedUsers: 0 };
+        } catch (error) {
+            throw new Error(
+                `UserService deleteInactiveUsersAndNotify: ${error}`
+            );
+        }
+    }
     /* ----------------------------------- DTO ---------------------------------- */
 
     async getUserById(id) {

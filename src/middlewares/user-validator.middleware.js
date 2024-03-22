@@ -24,5 +24,3 @@ export const validateRegister = [
         }
     },
 ];
-
-//los middlewares siempre tienen el req res y next! - para validator puedo usar express validator - joi - ver clase 30

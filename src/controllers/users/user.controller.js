@@ -206,6 +206,20 @@ export default class UserController extends Controllers {
         }
     };
 
+    deleteInactiveUsers = async (req, res) => {
+        try {
+            const { deletedCount, notifiedUsers } =
+                await userService.deleteInactiveUsersAndNotify();
+            res.status(200).json({
+                message: `Usuarios inactivos notificados y eliminados. Total: ${notifiedUsers}, Eliminados: ${deletedCount}`,
+            });
+        } catch (error) {
+            res.status(500).json({
+                message: `Error eliminando usuarios inactivos: ${error.message}`,
+            });
+        }
+    };
+
     /* ----------------------------------- DTO ---------------------------------- */
 
     getUserById = async (req, res, next) => {

@@ -18,7 +18,7 @@ router.post("/mockingproducts", controller.createMocksProducts);
 
 /* ---------------------------------- Get All ---------------------------------- */
 
-//router.get("/all", controller.getProductsQueries); // implemento las queries y aggregations
+//router.get("/all", controller.getProductsQueries); //  queries y aggregations
 
 router.get("/all", controller.getAll); // sin queries
 
@@ -34,9 +34,9 @@ router.get("/:id", controller.getById);
 
 router.post("/", rolePremium, productValidator, controller.create);
 
-router.put("/:id", roleAdminOrPremium, controller.update);
+router.put("/:id", controller.update);
 
-router.delete("/:id", roleAdminOrPremium, controller.delete);
+router.delete("/:id", controller.delete);
 
 router.get("/dto/:id", controller.getProdById);
 

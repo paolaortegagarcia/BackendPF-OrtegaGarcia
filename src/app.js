@@ -5,7 +5,6 @@ import session from "express-session";
 import { __dirname } from "./utils/utils.js";
 import { mongoStoreOptions } from "./utils/session/mongostore.options.js";
 import ApiRoutes from "./routes/index.routes/api.router.js";
-import renderRoutes from "./routes/index.routes/render.router.js";
 import { errorHandler } from "./middlewares/error-handler.middleware.js";
 import "./passport/local-strategy.js";
 import passport from "passport";
@@ -20,6 +19,7 @@ import swaggerJSDoc from "swagger-jsdoc";
 
 const apiRoutes = new ApiRoutes();
 const specs = swaggerJSDoc(info);
+
 /* --------------------------------- Express / Passport -------------------------------- */
 
 const app = express();
@@ -39,18 +39,11 @@ app.use(passport.session());
 /* --------------------------------- Routers -------------------------------- */
 
 app.use("/api", apiRoutes.getRouter());
-app.use("/", renderRoutes); //handlebars - vistas
-
-/* ------------------------------- Handlebars ------------------------------- */
-
-app.engine("handlebars", handlebars.engine());
-app.set("views", __dirname + "/views");
-app.set("view engine", "handlebars");
 
 /* --------------------------------- Server --------------------------------- */
 
 const PORT = config.PORT;
-const httpServer = app.listen(PORT, () =>
+app.listen(PORT, () =>
     console.log(
         `🚀 Server is running on port ${PORT} - ${config.NODE_ENV} mode - ${config.PERSISTENCE} persistence`
     )

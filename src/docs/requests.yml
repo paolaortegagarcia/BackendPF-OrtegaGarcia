@@ -36,7 +36,7 @@ components:
                     price: 100
                     stock: 70
                     category: Joyeria
-            login:
+            loginAdmin:
                 type: object
                 required:
                     - email
@@ -49,8 +49,44 @@ components:
                         type: string
                         description: Password del usuario
                 example:
-                    email: premiumCoder@coder.com
-                    password: "premium123"
+                    email: pao.ortega.95@gmail.com
+                    password: "123456789"
+            loginPremium:
+                type: object
+                required:
+                    - email
+                    - password
+                properties:
+                    email:
+                        type: string
+                        description: Email del usuario
+                    password:
+                        type: string
+                        description: Password del usuario
+                example:
+                    email: pao.ortega.95@mail.com
+                    password: "123456789"
+            register:
+                type: object
+                required:
+                    - email
+                    - password
+                properties:
+                    first_name:
+                        type: string
+                        example: John Doe
+                    last_name:
+                        type: string
+                        example: John Doe
+                    email:
+                        type: string
+                        format: email
+                        example: user@example.com
+                    password:
+                        type: string
+                        format: password
+                        example: "123456789"
+
             carts:
                 type: object
                 properties:

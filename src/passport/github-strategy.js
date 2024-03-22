@@ -16,12 +16,12 @@ const registerOrLogin = async (accessToken, refreshToken, profile, done) => {
     try {
         logger.info("Perfil de GitHub:", profile);
 
-        /* --------------------------------- Opcion1 -------------------------------- */
+        /* --------------------------------- Opcion1 - Si el mail esta en mails -------------------------------- */
         const emailsArray = profile.emails;
         const email = emailsArray.length > 0 ? emailsArray[0].value : null;
         logger.info(email);
 
-        /* --------------------------------- Opcion2 -------------------------------- */
+        /* --------------------------------- Opcion2 - si el mail esta en .email -------------------------------- */
         //const email = profile._json.email;
 
         if (!email) {
@@ -47,7 +47,6 @@ const registerOrLogin = async (accessToken, refreshToken, profile, done) => {
         return done(null, newUser);
     } catch (error) {
         logger.error(error);
-        //return done(error, null);
     }
 };
 

@@ -19,16 +19,14 @@ export const verifyToken = async (req, res, next) => {
         if (!user) return res.status(400).json({ msg: "Unauthorized" });
 
         /* -------------------------------- Refrescar Token ------------------------------- */
-        const now = Math.floor(Date.now() / 1000); // Tiempo actual en segundos
-        const tokenExp = decode.exp; // Tiempo de expiración del token
-        const timeUntilExp = tokenExp - now; // Tiempo hasta la expiración en segundos
+        const now = Math.floor(Date.now() / 1000);
+        const tokenExp = decode.exp;
+        const timeUntilExp = tokenExp - now;
 
         if (timeUntilExp <= 300) {
-            // 300 segundos = 5 minutos
-            // Generar un nuevo token con un tiempo de expiración renovado
             const newToken = userDao.generateToken(user, "15m");
             logger.info(">>>>>>SE REFRESCÓ EL TOKEN");
-            res.set("Authorization", `Bearer ${newToken}`); // Agregar el nuevo token al encabezado
+            res.set("Authorization", `Bearer ${newToken}`);
         }
         /* ------------------------------------ - ----------------------------------- */
         req.user = user;

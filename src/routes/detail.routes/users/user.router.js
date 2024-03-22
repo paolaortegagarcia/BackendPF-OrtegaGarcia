@@ -11,7 +11,16 @@ const router = Router();
 // si tengo que hacer la validación para varias rutas (siempre mirar que necesiten las mismas validaciones), puedo usar el .use() en el index o en un hilo - ver clase 30
 
 router.post("/register", validateRegister, controller.register);
-router.post("/login", passport.authenticate("loginStrategy"), controller.login);
+router.post(
+    "/login/admin",
+    passport.authenticate("loginStrategy"),
+    controller.login
+);
+router.post(
+    "/login/premium",
+    passport.authenticate("loginStrategy"),
+    controller.login
+);
 router.get("/private", verifyToken, controller.getUserById); //usando DTO y JWT
 
 router.post("/logout", controller.logout);
@@ -19,6 +28,8 @@ router.get("/authenticationError", controller.renderAuthenticationError);
 
 router.post("/reset-pass", verifyToken, controller.resetPass);
 router.put("/new-pass", verifyToken, controller.updatePass);
+
+router.delete("/inactive-users", controller.deleteInactiveUsers);
 
 router.post(
     "/:uid/documents",

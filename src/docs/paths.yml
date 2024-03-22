@@ -4,7 +4,7 @@ paths:
         post:
             tags:
                 - Products
-            summary: Creacion de productos
+            summary: Creacion de productos (usuarios premium)
             requestBody:
                 content:
                     application/json:
@@ -56,8 +56,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schema/Products/ValidationSchemaError"
-            security:
-                - BearerAuth: []
     /api/products/{id}:
         get:
             tags:
@@ -133,8 +131,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schema/Products/GetByIdError"
-            security:
-                - BearerAuth: []
     /api/products/add/{cartid}/{productid}:
         post:
             tags:
@@ -174,21 +170,68 @@ paths:
                                 $ref: "#/components/schema/Products/ValidationSchemaError"
             security:
                 - BearerAuth: []
-    ## login
-    /api/users/login:
+    ## users
+    /api/users/login/admin:
         post:
             tags:
                 - Users
-            summary: Login de usuario
+            summary: Login de usuario ADMIN
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: "#/components/parameters/schemas/login"
+                            $ref: "#/components/parameters/schemas/loginAdmin"
                 required: true
             responses:
                 200:
                     description: Login success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Users/User"
+    /api/users/login/premium:
+        post:
+            tags:
+                - Users
+            summary: Login de usuario PREMIUM
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/parameters/schemas/loginPremium"
+                required: true
+            responses:
+                200:
+                    description: Login success
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Users/User"
+    /api/users/inactive-users:
+        delete:
+            tags:
+                - Users
+            summary: Elimina usuarios inactivos y notifica a los mismos
+            responses:
+                200:
+                    description: deleted successfully
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schema/Users/User"
+    /api/users/register:
+        post:
+            tags:
+                - Users
+            summary: Registra un nuevo usuario
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/parameters/schemas/register"
+            responses:
+                200:
+                    description: registered successfully
                     content:
                         application/json:
                             schema:
@@ -199,12 +242,6 @@ paths:
             tags:
                 - Carts
             summary: Creacion de carritos
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: "#/components/parameters/schemas/carts"
-                required: true
             responses:
                 200:
                     description: Se creo el carrito correctamente

@@ -38,8 +38,7 @@ export default class Controllers {
     create = async (req, res, next) => {
         try {
             const obj = req.body;
-            //const user = req.user;
-            const newItem = await this.service.create(obj /* user */);
+            const newItem = await this.service.create(obj);
             if (!newItem)
                 httpResponse.NotFound(res, errorsDictionary.ERROR_CREATE_ITEM);
             else
